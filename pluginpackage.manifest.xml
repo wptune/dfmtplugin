@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginPackage xmlns="http://www.sdl.com/Plugins/PluginPackage/1.0">
+  <PlugInName>Custom.LTW Translation</PlugInName>
+  <Version>2022.2.1.0</Version>
+  <Description>Custom.LTW Plugin for Trados Studio 2022</Description>
+  <Author>VLK</Author>
+  <RequiredProduct name="TradosStudio" minversion="17.1" maxversion="17.9" />
+</PluginPackage>
