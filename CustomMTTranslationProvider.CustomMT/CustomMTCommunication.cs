@@ -5,56 +5,38 @@ namespace CustomMTTranslationProvider.CustomMT;
 
 internal class CustomMTCommunication
 {
-	public static List<Storage.GetTemplatesResult> GetTemplates(string source, string target, string _userToken)
-	{
-		return JsonConvert.DeserializeObject<List<Storage.GetTemplatesResult>>(Web.SendRequest(new Web.Request
-		{
-			method = Web.RequestMethod.POST,
-			url = Storage.urlGetTempplates,
-			payloadType = Web.RequestPayloadType.JSON,
-			Headers = new List<KeyValuePair<string, string>>
-			{
-				new KeyValuePair<string, string>("token", _userToken)
-			},
-			payloadJson = JsonConvert.SerializeObject((object)new Storage.GetTemplateListPayload
-			{
-				source_language = source.ToLowerInvariant(),
-				target_language = target.ToLowerInvariant()
-			})
-		}));
-	}
 
-	public static object GetTranslation(string template, string userToken, string[] textToTranslate)
-	{
-		//IL_005e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0063: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006b: Expected O, but got Unknown
-		string text = Web.SendRequest(new Web.Request
-		{
-			method = Web.RequestMethod.POST,
-			url = Storage.urlGetTranslation,
-			payloadType = Web.RequestPayloadType.JSON,
-			Headers = new List<KeyValuePair<string, string>>
-			{
-				new KeyValuePair<string, string>("token", userToken)
-			},
-			payloadJson = JsonConvert.SerializeObject((object)new Storage.GetTranslationPayload
-			{
-				template_name = template,
-				text = textToTranslate
-			})
-		});
-		JsonSerializerSettings val = new JsonSerializerSettings
-		{
-			MissingMemberHandling = (MissingMemberHandling)1
-		};
-		try
-		{
-			return JsonConvert.DeserializeObject<Storage.GetTranslationResult>(text, val);
-		}
-		catch
-		{
-			return JsonConvert.DeserializeObject<Storage.Error>(text);
-		}
-	}
+    public static object GetTranslation(string source, string target, string[] textToTranslate)
+    {
+        string text = Web.SendRequest(new Web.Request
+        {
+            method = Web.RequestMethod.POST,
+            url = Storage.urlGetTranslation,
+            payloadType = Web.RequestPayloadType.JSON,
+            payloadJson = JsonConvert.SerializeObject(new
+            {
+                inputs = new
+                {
+                    source_text_input = textToTranslate,
+                    source_language = source.ToLowerInvariant(),
+                    target_language = target.ToLowerInvariant(),
+                    subject_area = "", // Set the subject area
+                    style_guide_id = "" // Set the style guide ID
+                },
+                response_mode = "blocking"
+            })
+        });
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            MissingMemberHandling = MissingMemberHandling.Ignore
+        };
+        try
+        {
+            return JsonConvert.DeserializeObject<Storage.GetTranslationResult>(text, settings);
+        }
+        catch
+        {
+            return JsonConvert.DeserializeObject<Storage.Error>(text);
+        }
+    }
 }
