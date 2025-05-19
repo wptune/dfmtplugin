@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PluginPackage xmlns="http://www.sdl.com/Plugins/PluginPackage/1.0">
-  <PlugInName>Custom.LTW Translation</PlugInName>
-  <Version>2022.2.1.0</Version>
-  <Description>Custom.LTW Plugin for Trados Studio 2022</Description>
-  <Author>VLK</Author>
-  <RequiredProduct name="TradosStudio" minversion="17.1" maxversion="17.9" />
+  <PlugInName>Microsoft Translator Provider</PlugInName>
+  <Version>1.2.4.0</Version>
+  <Description>Microsoft Translator Provider</Description>
+  <Author>Trados AppStore Team</Author>
+  <RequiredProduct name="TradosStudio" minversion="17.2" maxversion="17.9" />
+  <Include>
+    <File>RestSharp.dll</File>
+    <File>System.Text.Json.dll</File>
+    <File>LanguageMappingProvider.dll</File>
+    <File>Dapper.StrongName.dll</File>
+    <File>System.IdentityModel.Tokens.Jwt.dll</File>
+  </Include>
 </PluginPackage>
