@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PluginPackage xmlns="http://www.sdl.com/Plugins/PluginPackage/1.0">
+  <PlugInName>DTW Translator Provider</PlugInName>
+  <Version>1.0.0.1</Version>
+  <Description>DTW Translator Provider</Description>
+  <Author>VLK</Author>
+  <RequiredProduct name="TradosStudio" minversion="17.2" maxversion="17.9" />
+	<Include>
+		<File>RestSharp.dll</File>
+		<File>System.Text.Json.dll</File>
+		<File>LanguageMappingProvider.dll</File>
+		<File>Dapper.StrongName.dll</File>
+		<File>System.IdentityModel.Tokens.Jwt.dll</File>
+	</Include>
+</PluginPackage>
